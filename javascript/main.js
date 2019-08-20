@@ -26,32 +26,8 @@ const popular = () => {
 popular()
 
 
-// Categoria Top Rated
+// Fetch para cada categoria simplificado en una funcion (no es para la home)
 
-const topRated = () => {
-    fetch(urlTopRated)
-    .then(response => response.json())
-    .then(res => console.log(res)) // 1
+const fetchPerCategory = (category) => {
+    
 }
-
-topRated()
-
-// Categoria Upcoming
-
-const upcoming = () => {
-    fetch(urlUpcoming)
-    .then(response => response.json())
-    .then(res => console.log(res)) // 1
-}
-
-upcoming()
-
-// Categoria Now Playing
-
-const nowPlaying = () => {
-    fetch(urlNowPlaying)
-    .then(response => response.json())
-    .then(res => console.log(res)) // 1
-}
-
-nowPlaying()
