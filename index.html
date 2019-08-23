@@ -23,7 +23,7 @@
 </div>
     <div class="desktop-container">
         <aside class="side-bar">
-                <div class="categoryButton" id="popular">
+                <div class="category-button" id="popular">
                         <a href="#">
                             <div class="category">
                                 <img src="images/popular.png" alt="">
@@ -31,7 +31,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="categoryButton" id="topRated">
+                    <div class="category-button" id="topRated">
                         <a href="#">
                             <div class="category">
                                 <img src="images/top_rated.png" alt="">
@@ -39,7 +39,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="categoryButton" id="upcoming">
+                    <div class="category-button" id="upcoming">
                         <a href="#">
                             <div class="category">
                                 <img src="images/upcoming.png" alt="">
@@ -47,7 +47,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="categoryButton" id="nowPlaying">
+                    <div class="category-button" id="nowPlaying">
                         <a href="#">
                             <div class="category">
                                 <img src="images/now_playing.png" alt="">
@@ -61,18 +61,26 @@
         <div class="banner">
             <h1 id="banner-text"> THE MOVIE DB APP</h1>
         </div>
-        <section class="popular">
-            
-        </section>
-        <section class="top-rated">
- 
-        </section>
-        <section class="upcoming">
-            
-        </section>
-        <section class="now-playing">
-            
-        </section>
+        <div class="movie-container">
+                <div class="home-results">
+                    <div class="category-header">
+                        <h2 class="category-name">Popular Movies</h2>
+                        <a href="#" class="button-view-all">
+                            <h4>View all →</h4>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
+                    </div>
+                    <div class="movies">
+                        <div class="movie">
+                            <div class="movie-poster">
+                                <img class="poster-image" src='images/no-image.png' alt="">
+                            </div>
+                            <h3 class="movie-title">Película 1</h3>
+                        </div>
+                    </div>
+                    <button class="load-more-button">LOAD MORE</button>
+                </div>
+        </div>
 </div>
 </div>
 </body>
