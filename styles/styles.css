@@ -24,13 +24,79 @@ body {
   margin: 0;
 }
 
-.logo {
+.header-nav {
+  width: 100%;
+  height: 75px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  position: relative;
+}
+.header-nav .logo {
   background-color: #212F3C;
   width: 95px;
   height: 75px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  position: fixed;
+  align-items: center;
+  cursor: pointer;
+}
+.header-nav .search-bar {
+  width: 85%;
+  height: 75px;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 4%;
+}
+.header-nav .search-bar #search-icon {
+  height: 17px;
+  opacity: 0.6;
+}
+.header-nav .search-bar #search-input {
+  width: 80%;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  box-sizing: border-box;
+  margin-left: 15px;
+}
+
+.container-vertical .banner {
+  background-image: url(../images/batman.jpg);
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 30%;
+  position: relative;
+}
+.container-vertical .banner #banner-text {
+  text-align: center;
+  position: relative;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.container-vertical .banner:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=styles.css.map */
