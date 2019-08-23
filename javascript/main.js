@@ -15,19 +15,25 @@ const urlTopRated = `${baseUrl}${categoryTopRated}${apiKey}&page=${currentPage}`
 const urlUpcoming = `${baseUrl}${categoryUpcoming}${apiKey}&page=${currentPage}`;
 const urlNowPlaying = `${baseUrl}${categoryNowPlaying}${apiKey}&page=${currentPage}`;
 
-// Categoria Popular
+// Elementos del HTML 
+// 1) Home y header de categorias
 
-const popular = () => {
-    fetch(urlPopular)
-    .then(response => response.json())
-    .then(res => console.log(res)) // 1
-}
+let homeBanner = document.getElementsByClassName('banner');
+let resultsContainer = document.getElementsByClassName('results');
+let textsInCategory = document.getElementsByClassName('category-header');
+let categoryTitle = document.getElementsByClassName('category-name');
+let viewAllButton = document.getElementsByClassName('button-view-all');
 
-popular()
+// 2) Para las peliculas
+
+let moviesContainer = document.getElementsByClassName('movies');
+let movieModel = document.getElementsByClassName('movie');
+let moviePosterDiv = document.getElementsByClassName('movie-poster');
+let moviePosterImg = document.getElementsByClassName('poster-image');
+let movieTitle = document.getElementsByClassName('movie-title');
+
 
 
 // Fetch para cada categoria simplificado en una funcion (no es para la home)
 
-const fetchPerCategory = (category) => {
-    
-}
+

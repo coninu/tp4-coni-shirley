@@ -162,7 +162,7 @@ body {
   padding: 25px;
   background-color: #F1F0F0;
 }
-.movie-container .home-results {
+.movie-container .results {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -246,12 +246,7 @@ body {
   opacity: 0.8;
   transition: 0.3s ease;
 }
-@media (max-width: 1100px) {
-  .movie-container .movies .movie:nth-of-type(5n) {
-    display: none;
-  }
-}
-.movie-container .movies .movie:hover .moviePicture {
+.movie-container .movies .movie:hover .movie-poster {
   transform: scale(1.03);
 }
 .movie-container .movies .movie:hover .movie-title {
