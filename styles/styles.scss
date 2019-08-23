@@ -1,16 +1,4 @@
-*html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -19,83 +7,142 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-body{
-    font-family: "Roboto", sans-serif;
-    margin: 0;
+body {
+	font-family: "Roboto", sans-serif;
+	margin: 0;
 }
 
-.header-nav{
-    width: 100%;
-    height: 75px;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-    position: relative;
-    .logo{
-        background-color: #212F3C;
-        width: 95px;
-        height: 75px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-    .search-bar{
-        width: 85%;
-        height: 75px;
+.header-nav {
+	width: 100%;
+	height: 75px;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 1;
+	position: relative;
+	.logo {
+		background-color: #212F3C;
+		width: 95px;
+		height: 75px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+	.search-bar {
+		width: 85%;
+		height: 75px;
+		background-color: white;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		margin-right: 4%;
+		#search-icon {
+			height: 17px;
+			opacity: 0.6;
+		}
+	}
+	#search-input {
+		width: 80%;
+		font-weight: 300;
+		font-size: 16px;
+		border: none;
+		box-sizing: border-box;
+		margin-left: 15px;
+	}
+}
+.desktop-container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	.side-bar {
+        position: fixed;
+        z-index: 4;
         background-color: white;
-        box-sizing: border-box;
+        width: 95px;
+        height: 475px;
         display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        margin-right: 4%;
-        #search-icon{
-            height:17px;
-            opacity: 0.6;
-        }
-        #search-input{
-            width: 80%;
-            font-weight: 300;
-            font-size: 16px;
-            border: none;
+        flex-direction: column;
+        z-index: 4;
+        .categoryButton {
+            width: 100%;
+            height: 100px;
+            text-align: center; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid whitesmoke;
             box-sizing: border-box;
-            margin-left: 15px;
+            cursor: pointer;
+            a {
+                text-decoration: none;
+            }
+            div {
+                margin: 0 auto;
+                opacity: 0.6;
+                transition: .5s;
+                img {
+                    width: 21%;
+                    margin-bottom: 5px;
+                }
+                h4 {
+                    font-size: 9px;
+                    line-height: 9px;
+                    font-weight: 5700;
+                    color: black;
+                    margin: 0px;
+                }
+            }
+        }
+        .categoryButton:hover div {
+            opacity: 1;
         }
     }
-}
+	}
 
-
- .container-vertical .banner{
-    background-image: url(../images/batman.jpg);
-    width: 100%;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 30%;
-    position: relative;
-    #banner-text{
-        text-align: center;
+.container-vertical {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f8f8;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	.banner {
+		background-image: url(../images/batman.jpg);
+		width: 100%;
+		height: 400px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 30%;
         position: relative;
-        font-size: 30px;
-        font-weight: 500;
-    }
+		#banner-text {
+			text-align: center;
+			position: relative;
+			font-size: 30px;
+			font-weight: 500;
+		}
+	}
 }
-
-.container-vertical .banner:before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    opacity: 0.7;
+.container-vertical .banner:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	opacity: 0.7;
 }
