@@ -1,111 +1,100 @@
 // API 
 
-const apiKey = '280b6cef62614967a758507e49de17c9';
+const apiKey = '?api_key=280b6cef62614967a758507e49de17c9';
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
 const categoryPopular = 'popular';
 const categoryTopRated = 'top_rated';
 const categoryUpcoming = 'upcoming';
 const categoryNowPlaying = 'now_playing';
 let currentPage = 1;
+const mainBanner = document.getElement('container-vertical');
+const scrollScreen = document.getElementById('banner');
 
-// categorias de cada seccion
+const getFetch = category => {
+    scrollScreen.classList.remove('hidden');
+    mainBanner.innerHTML += `<div class="wrapper">
+                                <header class="movies_header">
+                                    <h2 class="movies_title" id="movies_title_${category}"></h2>
+                                    <div class="movies_link" id="movies_link_${category}">
+                                    View All<div class="movies_link_icon"></div></div>
+                                </header>
+                                <ul class="movies_list" id="${'movies_list_'}${category}"></ul>
+                            </div>`;
+const movieTitle = document.getElementById(`movies_title_${category}`);
+    movieTitle.innerText = `${category}${' Movies'}`.replace('_', ' ');
+fetch(`${baseUrl}${category}${apiKey}`)
+    .then(res => res.json())
+    .then(movies => {
+        const fiveMovies = movies.results.slice(0,5);
+        const moviesList = document.getElementById(`movies_list_${category}`);
+        console.log(moviesList)
+        moviesList.innerHTML += fiveMovies.map(movie => `
+                <li class="movies_item" id="${movie.id}">
+                    <div class="movies_item_poster">
+                        <img src="https://image.tmdb.org/t/p/original${movie.poster_path}">
+                    </div>
+                    <div class="movies_item_content">
+                        <p class="movies_item_title">${movie.title}</p>
+                    </div>
+                </li>`)
+        .join('');
 
-const urlPopular = `${baseUrl}${categoryPopular}${apiKey}&page=${currentPage}`;
-const urlTopRated = `${baseUrl}${categoryTopRated}${apiKey}&page=${currentPage}`;
-const urlUpcoming = `${baseUrl}${categoryUpcoming}${apiKey}&page=${currentPage}`;
-const urlNowPlaying = `${baseUrl}${categoryNowPlaying}${apiKey}&page=${currentPage}`;
-
-// Elementos del HTML 
-// 1) Home y header de categorias
-
-let homeBanner = document.getElementsByClassName('banner');
-let resultsContainer = document.getElementsByClassName('results');
-let textSectionModel = document.getElementsByClassName('category-header');
-let categoryTitle = document.getElementsByClassName('category-name');
-let viewAllButton = document.getElementsByClassName('button-view-all');
-let contentContainer = document.getElementsByClassName('movie-container')
-
-// 2) Para las peliculas
-
-let moviesContainer = document.getElementsByClassName('movies');
-let movieModel = document.getElementsByClassName('movie');
-let moviePosterDiv = document.getElementsByClassName('movie-poster');
-let moviePosterImg = document.getElementsByClassName('poster-image');
-let movieTitle = document.getElementsByClassName('movie-title');
-//let contentContainer = document.getElementsByClassName('movie-container')
-
-
-
-
-// Creamos los elementos generales para el header de la home y peliculas
-
-const createTextSection = currentCategory => {
-    let textSectionModel = document.getElementsByClassName('category-header');
-    let categoryTitle = document.getElementsByClassName('category-name');
-    textSectionModel.innerHTML = '';
-    categoryTitle.innerHTML = currentCategory;
-    textSectionModel.appendChild(categoryTitle);
-    return textSectionModel
-}
-
-const createViewAllButton = container => {
-    let viewAllButton = document.getElementsByClassName('button-view-all')
-    container.appendChild(viewAllButton);
-    return viewAllButton
-}
-
-const createResultsNumberInfo = movies => {
-    let numberOfResults = document.createElement('h6');
-    numberOfResults.innerHTML = `${movies.total_results} results`;
-    return numberOfResults
-}
-
-
-// carga elementos de cada pelicula
-
-const loadMovieInfo = (movie, moviesContainer) => {
-    let movieModel = document.getElementsByClassName('movie');
-    let moviePosterDiv = document.getElementsByClassName('movie-poster');
-    if (movie.poster_path) {
-        moviePosterDiv.innerHTML = "<img class='poster-image' src= `https://image.tmdb.org/t/p/w500${movie.poster_path}";
-    } else {
-        moviePosterDiv.innerHTML = "<img class='poster-image' src='images/no-image.png'"
-    } 
-    
-    let movieTitle = document.getElementsByClassName('movie-title');
-    movieTitle.innerHTML = movie.title
-    // para el modal: newMovie.onclick = () => {moreInfo(movie.id)};
-    moviePosterDiv.appendChild(movieModel)
-    movieTitle.appendChild(movieModel)
-
-    moviesContainer.appendChild(movieModel);
-}
-
-
-// carga peliculas
-
-const homeMovies = (currentCategory, apiUrl) => {
-    fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        let movies = data.results.slice(0,5);
-        let resultsContainer = document.getElementsByClassName('results');
-        let textSectionModel = createTextSection(currentCategory);
-        createViewAllButton(textSection).onclick = () => {
-            changeMoviesInfo(currentCategory, apiUrl)
-        };
-        let moviesContainer = document.getElementsByClassName('movies');
-        resultsContainer.innerHTML = '';
-        moviesContainer.innerHTML = '';
-        resultsContainer.appendChild(textSectionModel);
-        for (let movie of movies){
-            loadBasicInfo(movie, moviesContainer)
-        }
-        resultsContainer.appendChild(moviesContainer);
-        contentContainer.appendChild(resultsContainer);
     });
-}
 
-homeMovies('Popular Movies', `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`);
+};
+
+getHome = () =>{
+    mainBanner.innerHTML = ' ';
+    getFetch('popular');
+    getFetch('top_rated');
+    getFetch('upcoming');
+    getFetch('now_playing');
+};
+
+getHome();
+
+const fetchCategory = category => {
+    scrollScreen.classList.add('hidden');
+    mainBanner.innerHTML += `<div class="wrapper">
+                                <header class="movies_header">
+                                    <h2 class="movies_title"></h2>
+                                    <div class="movies_link">
+                                        <div class="movies_link_icon"></div>
+                                    </div>
+                                </header>
+                                <ul class="movies_list" id="${'movies_list_'}${category}"></ul>
+                                <div class="button"><button id="${category}" class="load_more">LOAD MORE</button></div>
+                            </div>`;
+    const movieTitle = document.querySelector('h2');
+    movieTitle.innerText = `${category}${' Movies'}`.replace('_', ' ');
+    fetch(`${baseUrl}${category}${apiKey}&page=${currentPage}`)
+    .then(res => res.json())
+    .then(movies => {
+        const allMovies = movies.results;
+        console.log(allMovies);
+        document.getElementById(`movies_list_${category}`)
+        .innerHTML = allMovies.map(movie => `<li class="movies_item" id="${movie.id}">
+                                                <div class="movies_item_poster">
+                                                    <img src="https://image.tmdb.org/t/p/original${movie.poster_path}">
+                                                </div>
+                                                <div class="movies_item_content">
+                                                    <p class="movies_item_title">${movie.title}</p>
+                                                </div>
+                                            </li>`)
+    .join('');
+
+    document.querySelector('.movies_link')
+    .innerText = `${movies.total_results}${' results'}`
+    });
+    document.querySelector('button').onclick = function () {
+        paginaActual += 1;
+        fetchCategory(`${this.id}`);
+    };
+};
+
+getCategory = (category) => {
+    paginaActual = 1;
+    fetchCategory(category);
+};
 
 
