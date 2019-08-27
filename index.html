@@ -12,46 +12,46 @@
 <body onload="homePage()">
     <div class="sticky">
     <header class='header-nav'>
-        <div class="logo">
+        <div class="logo" onclick="homePage()">
             <a href="#"> <img src="images/iso_blanco_transparent.svg" id='logo-img'></a>
         </div>
         <div class="search-bar">
             <div class="icon-container "><img src="images/search.png" id="search-icon"> </div>
-            <input type="text" placeholder="Search for a movie..." id="search-input">
+            <input type="text" placeholder="Search for a movie..." id="search-input" onfocus="this.value=''" onkeyup="searchFunction()">
         </div>
     </header>
 </div>
     <div class="desktop-container">
     <!----------------------------------------
                     Menú Desktop
-    ---------------------------------------->
+     ---------------------------------------->
         <aside class="side-bar">
-                <div class="category-button" id="popularButton">
-                        <a href="#">
+                <div class="category-button" id="popularButton" onclick="selectCategory('popular')">
+                        <a href="#" >
                             <div class="category">
                                 <img src="images/popular.png" alt="">
                                 <h4>POPULAR</h4>
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="topRatedButton">
-                        <a href="#">
+                    <div class="category-button" id="topRatedButton" onclick="selectCategory('top_rated')">
+                        <a href="#" >
                             <div class="category">
                                 <img src="images/top_rated.png" alt="">
                                 <h4>TOP RATED</h4>
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="upcomingButton">
-                        <a href="#">
+                    <div class="category-button" id="upcomingButton" onclick="selectCategory('upcoming')">
+                        <a href="#" >
                             <div class="category">
                                 <img src="images/upcoming.png" alt="">
                                 <h4>UPCOMING</h4>
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="nowPlayingButton">
-                        <a href="#">
+                    <div class="category-button" id="nowPlayingButton" onclick="selectCategory('now_playing')">
+                        <a href="#" >
                             <div class="category">
                                 <img src="images/now_playing.png" alt="">
                                 <h4>NOW PLAYING</h4>
@@ -63,32 +63,23 @@
         Contenido Principal: banner y peliculas
     ---------------------------------------->
     <div id="container-vertical">
-        <div class="banner">
+        <div class="banner" id="batman-banner">
             <h1 id="banner-text"> THE MOVIE DB APP</h1>
         </div>
      <!----------------------------------------
-        Contiene resultados de Peliculas
+        Contiene resultados de Peliculas 
     ---------------------------------------->
         <div class="movie-container">
-
-            <!-- Categoria: Popular -->
-                <div class="results" >
+             <!-- HOME Categoria:  Popular -->
+                <div class="results" id='home-results'>
                     <div class="category-header">
                         <h2 class="category-name">Popular Movies</h2>
                         <a href="#" class="button-view-all">
                             <h4>View all →</h4>
                         </a>
                     </div>
-                    <div class="movies" id="popular">
-                       <!-- <div class="movie">
-                            <div class="movie-poster">
-                                <img class="poster-image" src='images/no-image.png' alt="">
-                            </div>
-                            <h3 class="movie-title">Película 1</h3>
-                        </div> ASI SE TIENE QUE CREAR EN HTML--> 
-                    </div>
-                </div>
-            <!-- Categoria: Top Rated -->
+                    <div class="movies" id="popular"></div>
+            <!-- HOME Categoria: Top Rated -->
                 <div class="results" >
                         <div class="category-header">
                             <h2 class="category-name"> Top Rated </h2>
@@ -96,11 +87,9 @@
                                 <h4>View all →</h4>
                             </a>
                         </div>
-                        <div class="movies" id="top_rated">
-
-                        </div>
+                        <div class="movies" id="top_rated"> </div>
                      </div>
-             <!-- Categoria: Top Upcoming -->
+             <!-- HOME Categoria: Top Upcoming -->
                     <div class="results">
                             <div class="category-header">
                                 <h2 class="category-name">Upcoming</h2>
@@ -108,12 +97,9 @@
                                     <h4>View all →</h4>
                                 </a>
                             </div>
-                            <div class="movies" id="upcoming">
-
-                            </div>
-
+                            <div class="movies" id="upcoming"> </div>
                         </div>
-                        <!-- Categoria: Now PLaying -->
+                        <!-- HOME Categoria: Now PLaying -->
                         <div class="results" >
                                 <div class="category-header">
                                     <h2 class="category-name">Now Playing</h2>
@@ -121,15 +107,18 @@
                                         <h4>View all →</h4>
                                     </a>
                                 </div>
-                                <div class="movies" id="now_playing">
-
-                                </div>
+                                <div class="movies" id="now_playing"> </div>
                              </div>
-
-                             <!-- Contenedor del LOAD MORE-->
-                             <div class="load-more-div">
-                            <button class="load-more-button">LOAD MORE</button>
                             </div>
+                            <!-- PAGINA por Categoria o para una Busqueda-->
+                             <div id="resultsPerCategoryOrSearch">
+                                <div class="load-more-div">
+                                <button class="load-more-button">LOAD MORE</button>
+                                </div>
+                             
+
+                        </div>
+
         </div>
 </div>
 </div>

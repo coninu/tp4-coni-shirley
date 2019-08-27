@@ -2,12 +2,16 @@
 
 const apiKey = '?api_key=280b6cef62614967a758507e49de17c9';
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
-let currentPage = 1;
 
+
+
+// Funcion que llama a la home
 
 const homePage = () => {
-    //clearAll()
-    //document.getElementById("container-vertical")
+    document.getElementById("resultsPerCategoryOrSearch").style.display="none"
+    document.getElementById("batman-banner").style.display=""
+    document.getElementById("home-results").style.display=""
+    // eso podria mejorar
     fetchPerCategoryAndFill ("popular")
     fetchPerCategoryAndFill ("top_rated")
     fetchPerCategoryAndFill ("upcoming")
@@ -29,7 +33,7 @@ const fetchPerCategoryAndFill = (category) => {
 // Creamos los elementos necesarios para cada pelicula
 
 const createMovies = (arrayOfMovies,container) =>{
-    arrayOfMovies.forEach(({title , poster_path })=>{ // acordate de agregar el id para el modal
+    arrayOfMovies.forEach(({title , poster_path, id})=>{ // acordate de agregar el id para el modal
         const movieContainer = document.createElement("div")
         movieContainer.classList.add("movie")
         const posterContainer = document.createElement("div")
@@ -50,3 +54,27 @@ const createMovies = (arrayOfMovies,container) =>{
     })
 }  
 
+// Funciones para el menu de navegacion
+
+const selectCategory = (category) => {
+    fetch (`${baseUrl}${category}${apiKey}`)
+        .then(res=>res.json())
+        .then(res=>printResults(res.results,category,res.total_results))
+}
+
+const printResults = (movies,query,totalResults) => {
+    document.getElementById("batman-banner").style.display="none"
+    document.getElementById("home-results").style.display="none"
+
+
+    const resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
+    resultsContainer.innerHTML=""
+    resultsContainer.style.display=""
+    //resultsContainer.appendChild(setCatTitle(query,totalResults))
+    const results = document.createElement("div")
+    results.classList.add("movies")
+    results.id="results"
+    createMovies(movies,results)
+    resultsContainer.appendChild(results)    
+   // setButton(results,query)
+}
