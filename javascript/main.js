@@ -2,99 +2,51 @@
 
 const apiKey = '?api_key=280b6cef62614967a758507e49de17c9';
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
-const categoryPopular = 'popular';
-const categoryTopRated = 'top_rated';
-const categoryUpcoming = 'upcoming';
-const categoryNowPlaying = 'now_playing';
 let currentPage = 1;
-const mainBanner = document.getElement('container-vertical');
-const scrollScreen = document.getElementById('banner');
 
-const getFetch = category => {
-    scrollScreen.classList.remove('hidden');
-    mainBanner.innerHTML += `<div class="wrapper">
-                                <header class="movies_header">
-                                    <h2 class="movies_title" id="movies_title_${category}"></h2>
-                                    <div class="movies_link" id="movies_link_${category}">
-                                    View All<div class="movies_link_icon"></div></div>
-                                </header>
-                                <ul class="movies_list" id="${'movies_list_'}${category}"></ul>
-                            </div>`;
-const movieTitle = document.getElementById(`movies_title_${category}`);
-    movieTitle.innerText = `${category}${' Movies'}`.replace('_', ' ');
-fetch(`${baseUrl}${category}${apiKey}`)
-    .then(res => res.json())
-    .then(movies => {
-        const fiveMovies = movies.results.slice(0,5);
-        const moviesList = document.getElementById(`movies_list_${category}`);
-        console.log(moviesList)
-        moviesList.innerHTML += fiveMovies.map(movie => `
-                <li class="movies_item" id="${movie.id}">
-                    <div class="movies_item_poster">
-                        <img src="https://image.tmdb.org/t/p/original${movie.poster_path}">
-                    </div>
-                    <div class="movies_item_content">
-                        <p class="movies_item_title">${movie.title}</p>
-                    </div>
-                </li>`)
-        .join('');
 
-    });
+const homePage = () => {
+    //clearAll()
+    //document.getElementById("container-vertical")
+    fetchPerCategoryAndFill ("popular")
+    fetchPerCategoryAndFill ("top_rated")
+    fetchPerCategoryAndFill ("upcoming")
+    fetchPerCategoryAndFill ("now_playing")
+    
+}
 
-};
+// Hacemos un fetch por cada categoria e imprimimos las peliculas en su container correspondiente
 
-getHome = () =>{
-    mainBanner.innerHTML = ' ';
-    getFetch('popular');
-    getFetch('top_rated');
-    getFetch('upcoming');
-    getFetch('now_playing');
-};
+const fetchPerCategoryAndFill = (category) => {
+    const container = document.getElementById(category)
+    container.classList.add('movies')
+    container.innerHTML=""
+    fetch(`${baseUrl}${category}${apiKey}`)
+        .then(response => response.json())
+        .then(res =>createMovies(res.results.slice(0,5),container))
+}
 
-getHome();
+// Creamos los elementos necesarios para cada pelicula
 
-const fetchCategory = category => {
-    scrollScreen.classList.add('hidden');
-    mainBanner.innerHTML += `<div class="wrapper">
-                                <header class="movies_header">
-                                    <h2 class="movies_title"></h2>
-                                    <div class="movies_link">
-                                        <div class="movies_link_icon"></div>
-                                    </div>
-                                </header>
-                                <ul class="movies_list" id="${'movies_list_'}${category}"></ul>
-                                <div class="button"><button id="${category}" class="load_more">LOAD MORE</button></div>
-                            </div>`;
-    const movieTitle = document.querySelector('h2');
-    movieTitle.innerText = `${category}${' Movies'}`.replace('_', ' ');
-    fetch(`${baseUrl}${category}${apiKey}&page=${currentPage}`)
-    .then(res => res.json())
-    .then(movies => {
-        const allMovies = movies.results;
-        console.log(allMovies);
-        document.getElementById(`movies_list_${category}`)
-        .innerHTML = allMovies.map(movie => `<li class="movies_item" id="${movie.id}">
-                                                <div class="movies_item_poster">
-                                                    <img src="https://image.tmdb.org/t/p/original${movie.poster_path}">
-                                                </div>
-                                                <div class="movies_item_content">
-                                                    <p class="movies_item_title">${movie.title}</p>
-                                                </div>
-                                            </li>`)
-    .join('');
-
-    document.querySelector('.movies_link')
-    .innerText = `${movies.total_results}${' results'}`
-    });
-    document.querySelector('button').onclick = function () {
-        paginaActual += 1;
-        fetchCategory(`${this.id}`);
-    };
-};
-
-getCategory = (category) => {
-    paginaActual = 1;
-    fetchCategory(category);
-};
-
+const createMovies = (arrayOfMovies,container) =>{
+    arrayOfMovies.forEach(({title , poster_path })=>{ // acordate de agregar el id para el modal
+        const movieContainer = document.createElement("div")
+        movieContainer.classList.add("movie")
+        const posterContainer = document.createElement("div")
+        posterContainer.classList.add("movie-poster")
+        const moviePoster = document.createElement('img')
+        moviePoster.classList.add('poster-image')
+        if (poster_path)
+        {moviePoster.src=`https://image.tmdb.org/t/p/w500/${poster_path}`} 
+        else{moviePoster.src="images/no-image.png"} 
+        const movieTitle = document.createElement('h3')
+        movieTitle.innerText = title
+        movieTitle.classList.add('movie-title')
+        posterContainer.appendChild(moviePoster)
+        movieContainer.appendChild(posterContainer)
+        movieContainer.appendChild(movieTitle)
+        container.appendChild(movieContainer)
+        //posterContainer.onclick = () =>toggleFunction(id) // para el modal
+    })
+}  
 

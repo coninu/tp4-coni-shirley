@@ -116,7 +116,7 @@ body {
   opacity: 1;
 }
 
-.container-vertical {
+#container-vertical {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -126,7 +126,7 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
-.container-vertical .banner {
+#container-vertical .banner {
   background-image: url(../images/batman.jpg);
   width: 100%;
   height: 400px;
@@ -138,14 +138,14 @@ body {
   background-position: 50% 30%;
   position: relative;
 }
-.container-vertical .banner #banner-text {
+#container-vertical .banner #banner-text {
   text-align: center;
   position: relative;
   font-size: 30px;
   font-weight: 500;
 }
 
-.container-vertical .banner:before {
+#container-vertical .banner:before {
   content: "";
   position: absolute;
   top: 0;
@@ -165,7 +165,7 @@ body {
 .movie-container .results {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
 }
 .movie-container .category-header {
   display: flex;
@@ -245,12 +245,14 @@ body {
   font-weight: 400;
   opacity: 0.8;
   transition: 0.3s ease;
+  color: #838D91;
+  padding-top: 8px;
 }
 .movie-container .movies .movie:hover .movie-poster {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 .movie-container .movies .movie:hover .movie-title {
-  opacity: 3;
+  color: black;
 }
 @media (max-width: 400px) {
   .movie-container {
@@ -261,6 +263,11 @@ body {
   .movie-container {
     padding: 5px;
   }
+}
+.movie-container .load-more-div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 button {
@@ -281,6 +288,10 @@ button {
 button:hover {
   color: whitesmoke;
   background: #081c24;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -9,7 +9,7 @@
     <script type='text/javascript' src="javascript/main.js"></script>
     <title> Pelispedia </title>
 </head>
-<body>
+<body onload="homePage()">
     <div class="sticky">
     <header class='header-nav'>
         <div class="logo">
@@ -22,8 +22,11 @@
     </header>
 </div>
     <div class="desktop-container">
+    <!----------------------------------------
+                    Menú Desktop
+    ---------------------------------------->
         <aside class="side-bar">
-                <div class="category-button" id="popular">
+                <div class="category-button" id="popularButton">
                         <a href="#">
                             <div class="category">
                                 <img src="images/popular.png" alt="">
@@ -31,7 +34,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="topRated">
+                    <div class="category-button" id="topRatedButton">
                         <a href="#">
                             <div class="category">
                                 <img src="images/top_rated.png" alt="">
@@ -39,7 +42,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="upcoming">
+                    <div class="category-button" id="upcomingButton">
                         <a href="#">
                             <div class="category">
                                 <img src="images/upcoming.png" alt="">
@@ -47,7 +50,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="category-button" id="nowPlaying">
+                    <div class="category-button" id="nowPlayingButton">
                         <a href="#">
                             <div class="category">
                                 <img src="images/now_playing.png" alt="">
@@ -55,30 +58,78 @@
                             </div>
                         </a>
                     </div>
-
-        </aside>
-    <div class="container-vertical">
+      </aside>
+      <!----------------------------------------
+        Contenido Principal: banner y peliculas
+    ---------------------------------------->
+    <div id="container-vertical">
         <div class="banner">
             <h1 id="banner-text"> THE MOVIE DB APP</h1>
         </div>
+     <!----------------------------------------
+        Contiene resultados de Peliculas
+    ---------------------------------------->
         <div class="movie-container">
-                <div class="results">
+
+            <!-- Categoria: Popular -->
+                <div class="results" >
                     <div class="category-header">
                         <h2 class="category-name">Popular Movies</h2>
                         <a href="#" class="button-view-all">
                             <h4>View all →</h4>
                         </a>
                     </div>
-                    <div class="movies">
-                        <div class="movie">
+                    <div class="movies" id="popular">
+                       <!-- <div class="movie">
                             <div class="movie-poster">
                                 <img class="poster-image" src='images/no-image.png' alt="">
                             </div>
                             <h3 class="movie-title">Película 1</h3>
-                        </div>
+                        </div> ASI SE TIENE QUE CREAR EN HTML--> 
                     </div>
-                    <button class="load-more-button">LOAD MORE</button>
                 </div>
+            <!-- Categoria: Top Rated -->
+                <div class="results" >
+                        <div class="category-header">
+                            <h2 class="category-name"> Top Rated </h2>
+                            <a href="#" class="button-view-all">
+                                <h4>View all →</h4>
+                            </a>
+                        </div>
+                        <div class="movies" id="top_rated">
+
+                        </div>
+                     </div>
+             <!-- Categoria: Top Upcoming -->
+                    <div class="results">
+                            <div class="category-header">
+                                <h2 class="category-name">Upcoming</h2>
+                                <a href="#" class="button-view-all">
+                                    <h4>View all →</h4>
+                                </a>
+                            </div>
+                            <div class="movies" id="upcoming">
+
+                            </div>
+
+                        </div>
+                        <!-- Categoria: Now PLaying -->
+                        <div class="results" >
+                                <div class="category-header">
+                                    <h2 class="category-name">Now Playing</h2>
+                                    <a href="#" class="button-view-all">
+                                        <h4>View all →</h4>
+                                    </a>
+                                </div>
+                                <div class="movies" id="now_playing">
+
+                                </div>
+                             </div>
+
+                             <!-- Contenedor del LOAD MORE-->
+                             <div class="load-more-div">
+                            <button class="load-more-button">LOAD MORE</button>
+                            </div>
         </div>
 </div>
 </div>
