@@ -312,7 +312,6 @@ button:hover {
   align-items: center;
 }
 #movie-modal .movie-details {
-  visibility: hidden;
   position: absolute;
   width: 786px;
   height: 820px;

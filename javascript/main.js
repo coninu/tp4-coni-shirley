@@ -141,8 +141,8 @@ const loadMore = (query,currentPage) => {
 // Funciones correspondientes al Modal
 
 
-const createModal = movieId => {
-    fetch(`${baseUrl}${movieId}${apiKey}`)
+const createModal = id => {
+    fetch(`${baseUrl}${id}${apiKey}`)
     .then(response => response.json())
     .then(data => {
         // contenedor del modal
@@ -156,8 +156,8 @@ const createModal = movieId => {
         let close = document.createElement('div')
         close.classList.add('close')
         close.innerText = "×"
-        close.onclick=()=> {toggleFunction()}
-        closeWindow.appendChild('close')
+        close.onclick=()=> toggleFunction()
+        closeWindow.appendChild(close)
         
 
         // fondo del modal
@@ -165,7 +165,7 @@ const createModal = movieId => {
         background.classList.add('background')
         let backgroundImage = document.createElement('img')
         if(data.backdrop_path){ backgroundImage.src=`https://image.tmdb.org/t/p/w1280${data.backdrop_path}`}
-        background.appendChild('backgroundImage')
+        background.appendChild(backgroundImage)
 
         // poster del modal
         let poster = document.createElement('div')
@@ -174,7 +174,7 @@ const createModal = movieId => {
         if (data.poster_path) {
             posterImage.src = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
         } else {posterImage.src= 'images/no-image.png'}
-        poster.appendChild('poster-image')
+        poster.appendChild(posterImage)
 
         //contenedor titulo y subtitulo
         // titulo de la pelicula
@@ -189,8 +189,8 @@ const createModal = movieId => {
         subtitle.classList.add('subtitle')
         subtitle.innerText = data.tagline
         // apenddeo al container del titulo
-        movieTitles.appendChild('movieTitle')
-        movieTitles.appendChild('subtitle')
+        movieTitles.appendChild(movieTitle)
+        movieTitles.appendChild(subtitle)
 
         // container descripcion
         let solidBack = document.createElement('div')
@@ -198,20 +198,20 @@ const createModal = movieId => {
         // container info 
         let descriptionCont = document.createElement('div')
         descriptionCont.classList.add('description')
-        solidBack.appendChild('description')
+        solidBack.appendChild(descriptionCont)
         // resumen
         let summary = document.createElement('p')
         summary.classList.add('summary')
         summary.innerText = data.overview
-        description.appendChild('summary')
+        descriptionCont.appendChild(summary)
         // genero
         let genres = document.createElement('h3')
         genres.innerText = 'GENRES'
         let genre = document.createElement('p')
         genre.classList.add('genre')
         genre.innerHTML = data.genres.map(genre => genre.name)
-        description.appendChild('genres')
-        description.appendChild('genre')
+        descriptionCont.appendChild(genres)
+        descriptionCont.appendChild(genre)
 
         // fecha de lanzamiento
         let date = document.createElement('h3')
@@ -219,25 +219,26 @@ const createModal = movieId => {
         let releaseDate = document.createElement('p')
         releaseDate.classList.add('release-date')
         releaseDate.innerText = data.release_date;
-        description.appendChild('date')
-        description.appendChild('releaseDate')
+        descriptionCont.appendChild(date)
+        descriptionCont.appendChild(releaseDate)
 
         // apendeo todo al modal
-        movieDetails.appendChild('closeWindow')
-        movieDetails.appendChild('background')
-        movieDetails.appendChild('poster')
-        movieDetails.appendChild('movieTitles')
-        movieDetails.appendChild('solidBack')
+        movieDetails.appendChild(closeWindow)
+        movieDetails.appendChild(background)
+        movieDetails.appendChild(poster)
+        movieDetails.appendChild(movieTitles)
+        movieDetails.appendChild(solidBack)
+        return movieDetails
 
     });
 }
 
 
 
-const toggleFunction = (movieId) => { 
-    let modal = document.getElementsById("movie-modal");
+const toggleFunction = (id) => { 
+    let modal = document.getElementById("movie-modal");
     if (modal.style.visibility === "hidden") {
-        createModal(movieId) 
+        createModal(id) 
         modal.style.visibility = "visible";
     } else {
         modal.style.visibility = "hidden";
