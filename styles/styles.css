@@ -164,7 +164,7 @@ aside nav .types .type {
 body {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
-  margin: 0;
+  margin: 10;
   height: 100%;
   color: #081c24;
   line-height: 1.6;
