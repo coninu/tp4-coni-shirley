@@ -2,7 +2,7 @@
 
 // API 
 
-const apiKey = '?api_key=280b6cef62614967a758507e49de17c9';
+const apiKey = '280b6cef62614967a758507e49de17c9';
 const baseUrl = 'https://api.themoviedb.org/3/movie/';
 
 // Funcion que llama a la home
@@ -25,7 +25,7 @@ const fetchPerCategoryAndFill = (category) => {
     const container = document.getElementById(category)
     container.classList.add('movies')
     container.innerHTML=""
-    fetch(`${baseUrl}${category}${apiKey}`)
+    fetch(`${baseUrl}${category}?api_key=${apiKey}`)
         .then(response => response.json())
         .then(res =>createMovies(res.results.slice(0,5),container))
 }
@@ -59,10 +59,31 @@ const createMovies = (arrayOfMovies,container) =>{
 const selectCategory = (category) => {
     setTimeout(() => { // para probar - transiciones a explorar
         document.getElementById("resultsPerCategoryOrSearch").style.transition = '0.5s';
-    fetch (`${baseUrl}${category}${apiKey}`)
+    fetch (`${baseUrl}${category}?api_key=${apiKey}`)
         .then(res=>res.json())
         .then(res=> printResults(res.results,category,res.total_results))},500)
 }
+
+// Funciones de busqueda de peliculas
+
+const searchMovie = () => {
+    let query = event.target.value
+    if (query.length>=3 || (event.keyCode===13 && query!==lastRequest)) {
+        lastRequest=query
+        fetch (`https://api.themoviedb.org/3/search/movie?${apiKey}&query=${query}`)
+            .then(res=>res.json())
+            .then(res=>
+                {if (res.results.length >= 1) {
+                    printResults(res.results,query,res.total_results)
+                } else {
+                    resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
+                    resultsContainer.innerHTML= "<div class='no-results'> Oops! We couldn't find anything that matches. </div>"
+                }
+    })}
+    }
+
+
+// Funcion que imprime peliculas por categoria
 
 const printResults = (movies,query,totalResults) => {
     document.getElementById("batman-banner").style.display="none"
@@ -112,7 +133,7 @@ const createCategoryHeader = (category,totalResults) => {
 
 // 2) creamos el boton de load more
 const createLoadMoreButton = (container,category) => {
-    let currentPage = 2
+    let currentPage = 1
     const loadMoreButton = document.createElement("button")
     loadMoreButton.innerText="LOAD MORE"
     loadMoreButton.classList.add('load-more-button')
@@ -131,8 +152,8 @@ const loadMore = (query,currentPage) => {
     container.classList.add('movies')
     let url
     query === "popular"||query==="top_rated"||query==="upcoming"||query==="now_playing"
-        ?url=`${baseUrl}${query}${apiKey}&page=${currentPage}`
-        :url=`${baseUrl}search/movie${apiKey}&query=${query}&page=${currentPage}`
+        ?url=`${baseUrl}${query}?api_key=${apiKey}&page=${currentPage}`
+        :url=`${baseUrl}search/movie?${apiKey}&query=${query}&page=${currentPage}`
     fetch(url)
         .then(response => response.json())
         .then(res => createMovies(res.results,container))
@@ -142,7 +163,7 @@ const loadMore = (query,currentPage) => {
 
 
 const createModal = id => {
-    fetch(`${baseUrl}${id}${apiKey}`)
+    fetch(`${baseUrl}${id}?api_key=${apiKey}`)
     .then(response => response.json())
     .then(data => {
         // contenedor del modal
@@ -244,4 +265,5 @@ const toggleFunction = (id) => {
         modal.style.visibility = "hidden";
     }
 }
+
 
