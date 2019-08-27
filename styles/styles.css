@@ -205,6 +205,11 @@ body {
   margin: 0;
   font-size: 13px;
 }
+.movie-container .category-header .num-results {
+  font-size: 12px;
+  font-weight: 100;
+  margin: 0;
+}
 .movie-container .movies {
   display: flex;
   flex-direction: row;

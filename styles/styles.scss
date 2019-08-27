@@ -192,6 +192,7 @@ body {
                 font-weight: 100;
                 margin: 0;
             }
+            
         } 
         .button-view-all:hover {
             opacity: 1;
@@ -200,6 +201,11 @@ body {
             font-weight: 400;
             margin: 0;
             font-size: 13px;
+        }
+        .num-results{
+            font-size: 12px;
+            font-weight: 100;
+            margin: 0;
         }
     }
     .movies {
@@ -286,3 +292,4 @@ button:hover {
 .hidden{
     display:none;
 }
+

@@ -9,10 +9,10 @@
     <script type='text/javascript' src="javascript/main.js"></script>
     <title> Pelispedia </title>
 </head>
-<body onload="homePage()">
+<body onload="loadHome()">
     <div class="sticky">
     <header class='header-nav'>
-        <div class="logo" onclick="homePage()">
+        <div class="logo" onclick="loadHome()">
             <a href="#"> <img src="images/iso_blanco_transparent.svg" id='logo-img'></a>
         </div>
         <div class="search-bar">
@@ -74,7 +74,7 @@
                 <div class="results" id='home-results'>
                     <div class="category-header">
                         <h2 class="category-name">Popular Movies</h2>
-                        <a href="#" class="button-view-all">
+                        <a href="#" class="button-view-all" onclick="selectCategory('popular')">
                             <h4>View all →</h4>
                         </a>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="results" >
                         <div class="category-header">
                             <h2 class="category-name"> Top Rated </h2>
-                            <a href="#" class="button-view-all">
+                            <a href="#" class="button-view-all" onclick="selectCategory('top_rated')">
                                 <h4>View all →</h4>
                             </a>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="results">
                             <div class="category-header">
                                 <h2 class="category-name">Upcoming</h2>
-                                <a href="#" class="button-view-all">
+                                <a href="#" class="button-view-all" onclick="selectCategory('upcoming')">
                                     <h4>View all →</h4>
                                 </a>
                             </div>
@@ -103,7 +103,7 @@
                         <div class="results" >
                                 <div class="category-header">
                                     <h2 class="category-name">Now Playing</h2>
-                                    <a href="#" class="button-view-all">
+                                    <a href="#" class="button-view-all" onclick="selectCategory('now_playing')">
                                         <h4>View all →</h4>
                                     </a>
                                 </div>
@@ -111,13 +111,7 @@
                              </div>
                             </div>
                             <!-- PAGINA por Categoria o para una Busqueda-->
-                             <div id="resultsPerCategoryOrSearch">
-                                <div class="load-more-div">
-                                <button class="load-more-button">LOAD MORE</button>
-                                </div>
-                             
-
-                        </div>
+                             <div id="resultsPerCategoryOrSearch"> </div>
 
         </div>
 </div>
