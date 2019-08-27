@@ -91,7 +91,29 @@ body {
             right: 15px;
             top: 33px;
         }
+     
     }
+    .nav-hamburger-active{
+        .bar{
+            display: block;
+            position: absolute;
+            width: 23px;
+            height: 1px;
+            background: rgba(8,28,36,.5)}
+        .bar:first-child{
+            display: block;
+            width: 0;
+        }
+        .bar:nth-child(2){
+            display: block;
+            transform: rotate(-45deg);
+        }
+        .bar:nth-child(3){
+            display: block;
+            width: 0;
+        }
+        }
+
 }
 .desktop-container {
 	width: 100%;

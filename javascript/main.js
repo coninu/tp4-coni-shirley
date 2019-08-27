@@ -135,3 +135,11 @@ const loadMore = (query,currentPage) => {
         .then(response => response.json())
         .then(res => createMovies(res.results,container))
 }
+
+// Menu hamburguer
+
+const menuHamburger = () =>{
+    const activeHamburger = document.getElementById("nav-hamburger")
+    activeHamburger.classList.toggle("nav-hamburger-active")
+}
+

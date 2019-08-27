@@ -82,6 +82,21 @@ body {
     .header-nav .nav-hamburger .bar:nth-child(3) {
       right: 15px;
       top: 33px; }
+  .header-nav .nav-hamburger-active .bar {
+    display: block;
+    position: absolute;
+    width: 23px;
+    height: 1px;
+    background: rgba(8, 28, 36, 0.5); }
+  .header-nav .nav-hamburger-active .bar:first-child {
+    display: block;
+    width: 0; }
+  .header-nav .nav-hamburger-active .bar:nth-child(2) {
+    display: block;
+    transform: rotate(-45deg); }
+  .header-nav .nav-hamburger-active .bar:nth-child(3) {
+    display: block;
+    width: 0; }
 
 .desktop-container {
   width: 100%;
