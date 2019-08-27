@@ -1,3 +1,5 @@
+
+
 // API 
 
 const apiKey = '?api_key=280b6cef62614967a758507e49de17c9';
@@ -31,7 +33,7 @@ const fetchPerCategoryAndFill = (category) => {
 // Creamos los elementos necesarios para cada pelicula
 
 const createMovies = (arrayOfMovies,container) =>{
-    arrayOfMovies.forEach(({title , poster_path, id})=>{ // acordate de agregar el id para el modal
+    arrayOfMovies.forEach(({title , poster_path, id})=>{ 
         const movieContainer = document.createElement("div")
         movieContainer.classList.add("movie")
         const posterContainer = document.createElement("div")
@@ -48,7 +50,7 @@ const createMovies = (arrayOfMovies,container) =>{
         movieContainer.appendChild(posterContainer)
         movieContainer.appendChild(movieTitle)
         container.appendChild(movieContainer)
-        //posterContainer.onclick = () =>toggleFunction(id) // para el modal
+        posterContainer.onclick = () => createModal(id)
     })
 }  
 
@@ -135,3 +137,114 @@ const loadMore = (query,currentPage) => {
         .then(response => response.json())
         .then(res => createMovies(res.results,container))
 }
+
+// Funciones correspondientes al Modal
+
+const selectedMovieContainer = document.getElementById('movieModal');
+const closeWindow = document.getElementById('button-close');
+const loading = document.getElementById('loading');
+
+const createModal = movieId => {
+    fetch(`${baseUrl}${movieId}${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+        // contenedor del modal
+        let movieDetails = document.createElement('div')
+        movieDetails.classList.add('movie-details')
+
+        // fondo del modal
+        let background = document.createElement('div');
+        background.classList.add('background')
+        let backgroundImage = document.createElement('img')
+        if(data.backdrop_path){ backgroundImage.src=`https://image.tmdb.org/t/p/w1280${data.backdrop_path}`}
+        background.appendChild('backgroundImage')
+
+        // poster del modal
+        let poster = document.createElement('div')
+        poster.classList.add('movie-img')
+        let posterImage = document.createElement('img')
+        if (data.poster_path) {
+            posterImage.src = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+        } else {posterImage.src= 'images/no-image.png'}
+        poster.appendChild('poster-image')
+
+        //contenedor titulo y subtitulo
+        // titulo de la pelicula
+        let movieTitles = document.createElement('div')
+        movieTitles.classList.add('movie-titles')
+        let movieTitle = document.createElement('h1')
+        movieTitle.classList.add('title')
+        movieTitle.innerText = data.title
+
+        //subtitulo de la pelicula
+        let subtitle = document.createElement('h4')
+        subtitle.classList.add('subtitle')
+        subtitle.innerText = data.tagline
+        // apenddeo al container del titulo
+        movieTitles.appendChild('movieTitle')
+        movieTitles.appendChild('subtitle')
+
+        // container descripcion
+        let solidBack = document.createElement('div')
+        solidBack.classList.add('solid-back')
+        // container info 
+        let descriptionCont = document.createElement('div')
+        descriptionCont.classList.add('description')
+        solidBack.appendChild('description')
+        // resumen
+        let summary = document.createElement('p')
+        summary.classList.add('summary')
+        summary.innerText = data.overview
+        description.appendChild('summary')
+        // genero
+        let genres = document.createElement('h3')
+        genres.innerText = 'GENRES'
+        let genre = document.createElement('p')
+        genre.classList.add('genre')
+        genre.innerHTML = data.genres.map(genre => genre.name)
+        description.appendChild('genres')
+        description.appendChild('genre')
+
+        // fecha de lanzamiento
+        let date = document.createElement('h3')
+        date.innerText = 'RELEASE DATE'
+        let releaseDate = document.createElement('p')
+        releaseDate.classList.add('release-date')
+        releaseDate.innerText = data.release_date;
+        description.appendChild('date')
+        description.appendChild('releaseDate')
+
+        // apendeo todo al modal
+        movieDetails.appendChild('background')
+        movieDetails.appendChild('poster')
+        movieDetails.appendChild('movieTitles')
+        movieDetails.appendChild('solidBack')
+
+
+        showPopUp();
+    });
+}
+
+const showPopUp = () => {
+    closeWindow.style.display= 'flex';
+    selectedMovieContainer.style.visibility = 'visible';
+    loading.style.width = '25px';
+    loading.style.height = '25px';
+    loading.style.transition = '0.5s';
+    setTimeout(() => {
+        selectedMovie.style.visibility = 'visible';
+        selectedMovie.style.transition = '0.5s';
+    }, 500)
+}
+
+const hidePopUp = () => {
+    selectedMovieContainer.style.visibility = 'hidden';
+    selectedMovie.style.visibility = 'hidden';
+    selectedMovie.style.transition = '0s';
+    loading.style.transition = '0s';
+    loading.style.width = '50px';
+    loading.style.height = '50px';
+    closeWindow.style.display = 'none';
+}
+
+//closeWindow.onclick = () => {hidePopUp()}
