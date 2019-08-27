@@ -1,5 +1,3 @@
-
-
 // API 
 
 const apiKey = '280b6cef62614967a758507e49de17c9';
@@ -50,7 +48,7 @@ const createMovies = (arrayOfMovies,container) =>{
         movieContainer.appendChild(posterContainer)
         movieContainer.appendChild(movieTitle)
         container.appendChild(movieContainer)
-        posterContainer.onclick = () => createModal(id)
+        posterContainer.onclick = () => toggleFunction(id)
     })
 }  
 
@@ -134,15 +132,18 @@ const createCategoryHeader = (category,totalResults) => {
 // 2) creamos el boton de load more
 const createLoadMoreButton = (container,category) => {
     let currentPage = 1
+    const loadMoreDiv = document.createElement("div")
+    loadMoreDiv.classList.add('load-more-div')
     const loadMoreButton = document.createElement("button")
     loadMoreButton.innerText="LOAD MORE"
     loadMoreButton.classList.add('load-more-button')
+    loadMoreDiv.appendChild(loadMoreButton)
     loadMoreButton.onclick=()=>{
         loadMore(category,currentPage)
         currentPage++
         return currentPage
     }
-    container.appendChild(loadMoreButton)
+    container.appendChild(loadMoreDiv)
 }
 
 // Esta funcion carga mas peliculas en la pantalla en base al boton
@@ -249,7 +250,10 @@ const createModal = id => {
         movieDetails.appendChild(poster)
         movieDetails.appendChild(movieTitles)
         movieDetails.appendChild(solidBack)
-        return movieDetails
+
+        let modal= document.createElement('div');
+        modal.classList.add('movie-modal')
+        modal.appendChild(movieDetails)
 
     });
 }
