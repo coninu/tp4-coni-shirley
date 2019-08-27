@@ -140,9 +140,6 @@ const loadMore = (query,currentPage) => {
 
 // Funciones correspondientes al Modal
 
-const selectedMovieContainer = document.getElementById('movieModal');
-const closeWindow = document.getElementById('button-close');
-const loading = document.getElementById('loading');
 
 const createModal = movieId => {
     fetch(`${baseUrl}${movieId}${apiKey}`)
@@ -151,6 +148,17 @@ const createModal = movieId => {
         // contenedor del modal
         let movieDetails = document.createElement('div')
         movieDetails.classList.add('movie-details')
+
+        // boton para cerrar
+        
+        let closeWindow = document.createElement('div')
+        closeWindow.classList.add('button-close')
+        let close = document.createElement('div')
+        close.classList.add('close')
+        close.innerText = "×"
+        close.onclick=()=> {toggleFunction()}
+        closeWindow.appendChild('close')
+        
 
         // fondo del modal
         let background = document.createElement('div');
@@ -215,36 +223,24 @@ const createModal = movieId => {
         description.appendChild('releaseDate')
 
         // apendeo todo al modal
+        movieDetails.appendChild('closeWindow')
         movieDetails.appendChild('background')
         movieDetails.appendChild('poster')
         movieDetails.appendChild('movieTitles')
         movieDetails.appendChild('solidBack')
 
-
-        showPopUp();
     });
 }
 
-const showPopUp = () => {
-    closeWindow.style.display= 'flex';
-    selectedMovieContainer.style.visibility = 'visible';
-    loading.style.width = '25px';
-    loading.style.height = '25px';
-    loading.style.transition = '0.5s';
-    setTimeout(() => {
-        selectedMovie.style.visibility = 'visible';
-        selectedMovie.style.transition = '0.5s';
-    }, 500)
+
+
+const toggleFunction = (movieId) => { 
+    let modal = document.getElementsById("movie-modal");
+    if (modal.style.visibility === "hidden") {
+        createModal(movieId) 
+        modal.style.visibility = "visible";
+    } else {
+        modal.style.visibility = "hidden";
+    }
 }
 
-const hidePopUp = () => {
-    selectedMovieContainer.style.visibility = 'hidden';
-    selectedMovie.style.visibility = 'hidden';
-    selectedMovie.style.transition = '0s';
-    loading.style.transition = '0s';
-    loading.style.width = '50px';
-    loading.style.height = '50px';
-    closeWindow.style.display = 'none';
-}
-
-//closeWindow.onclick = () => {hidePopUp()}

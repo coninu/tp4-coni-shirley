@@ -1,24 +1,15 @@
-.movie-modal {
+#movie-modal {
     width: 100%;
     height: 100vh;
     background-color: rgba(8,28,36,.98);
     z-index: 5;
     position: fixed;
     overflow: auto;
-    visibility: hidden; 
+    //display:none;
+    visibility:hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    .loading {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #bc3b69;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
     .movie-details { 
         visibility: hidden; 
         position: absolute;
@@ -172,7 +163,7 @@
             box-sizing: border-box;
             margin: 40px;
             @media(max-width: 786px){
-                visibility: hidden;
+               // visibility: hidden;
             }
             img {
                 width: 100%;
