@@ -9,7 +9,7 @@ const loadHome = () => {
     document.getElementById("resultsPerCategoryOrSearch").style.display="none"
     document.getElementById("batman-banner").style.display=""
     document.getElementById("home-results").style.display=""
-    // eso podria mejorar
+    // eso podria mejorar (o ser una funcion)
     fetchPerCategoryAndFill ("popular")
     fetchPerCategoryAndFill ("top_rated")
     fetchPerCategoryAndFill ("upcoming")
@@ -55,7 +55,7 @@ const createMovies = (arrayOfMovies,container) =>{
 // Funciones para el menu de navegacion
 
 const selectCategory = (category) => {
-    setTimeout(() => { // para probar - transiciones a explorar
+    setTimeout(() => { // para probar - transiciones a explorar (ahre kien sas cristobal colon)
         document.getElementById("resultsPerCategoryOrSearch").style.transition = '0.5s';
     fetch (`${baseUrl}${category}?api_key=${apiKey}`)
         .then(res=>res.json())
@@ -69,16 +69,19 @@ const searchMovie = () => {
     if (query.length>=3 || (event.keyCode===13 && query!==lastRequest)) {
         lastRequest=query
         fetch (`https://api.themoviedb.org/3/search/movie?${apiKey}&query=${query}`)
+        // no pude usar el baseUrl porque tiene un movie demas y que pereza cambiar todo de nuevo :(
             .then(res=>res.json())
             .then(res=>
-                {if (res.results.length >= 1) {
-                    printResults(res.results,query,res.total_results)
-                } else {
-                    resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
-                    resultsContainer.innerHTML= "<div class='no-results'> Oops! We couldn't find anything that matches. </div>"
-                }
-    })}
+                {
+                    if (res.results.length >= 1) {
+                        printResults(res.results,query,res.total_results)
+                    } else {
+                        resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
+                        resultsContainer.innerHTML= "<div class='no-results'> Oops! We couldn't find anything that matches. </div>"
+                    }
+                })
     }
+}
 
 
 // Funcion que imprime peliculas por categoria
@@ -97,9 +100,10 @@ const printResults = (movies,query,totalResults) => {
     results.id="results"
     createMovies(movies,results)
     resultsContainer.appendChild(results) 
-    //const mainDiv = document.getElementById('movie-container')   
+    const mainDiv = document.getElementById('movie-container')   
     //mainDiv.classList.add('movie-container')
-    createLoadMoreButton(resultsContainer,query) 
+    if(document.getElementById("loadMoreBtn")===null)
+        { createLoadMoreButton(mainDiv,query) }
 }
 
 // Creamos elementos para las categorias : 1) el header
@@ -142,6 +146,7 @@ const createLoadMoreButton = (container,category) => {
 
     const loadMoreButton = document.createElement("button")
     loadMoreButton.innerText="LOAD MORE"
+    loadMoreButton.id="loadMoreBtn"
     loadMoreButton.classList.add('load-more-button')
     loadMoreButton.onclick=()=>{
         loadMore(category,currentPage)
@@ -161,6 +166,7 @@ const loadMore = (query,currentPage) => {
     query === "popular"||query==="top_rated"||query==="upcoming"||query==="now_playing"
         ?url=`${baseUrl}${query}?api_key=${apiKey}&page=${currentPage}`
         :url=`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`
+        // no pude usar el baseUrl porque tiene un movie demas y que pereza cambiar todo de nuevo :(
     fetch(url)
         .then(response => response.json())
         .then(res => {
