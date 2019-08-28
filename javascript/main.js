@@ -142,7 +142,7 @@ const createLoadMoreButton = (container,category) => {
     loadMoreButton.innerText="LOAD MORE"
     loadMoreButton.classList.add('load-more-button')
     loadMoreButton.onclick=()=>{
-        console.log('snbsknd');
+       
         
         loadMore(category,currentPage)
         currentPage++
@@ -198,6 +198,7 @@ const createModal = id => {
         let backgroundImage = document.createElement('img')
         if(data.backdrop_path){ backgroundImage.src=`https://image.tmdb.org/t/p/w1280${data.backdrop_path}`}
         background.appendChild(backgroundImage)
+        background.appendChild(closeWindow)
 
         // poster del modal
         let poster = document.createElement('div')
@@ -223,6 +224,7 @@ const createModal = id => {
         // apenddeo al container del titulo
         movieTitles.appendChild(movieTitle)
         movieTitles.appendChild(subtitle)
+        background.appendChild(movieTitles)
 
         // container descripcion
         let solidBack = document.createElement('div')
@@ -262,8 +264,8 @@ const createModal = id => {
         movieDetails.appendChild(solidBack)
 
         let modal= document.getElementById('movie-modal');
-        // modal.classList.add('movie-modal')
         modal.appendChild(movieDetails)
+        
 
     });
 }
@@ -271,16 +273,13 @@ const createModal = id => {
 
 
 const toggleFunction = (id) => { 
-    
     let modal = document.getElementById("movie-modal");
     modal.classList.toggle('hidden')
-    createModal(id) 
-    // if (modal.style.visibility === "hidden") {
-    //     createModal(id) 
-    //     modal.style.visibility = "visible";
-    // } else {
-    //     modal.style.visibility = "hidden";
-    // }
+    if (modal.classList.contains('hidden')){
+        modal.innerHTML= ""
+    }else {
+        createModal(id)
+    }
 }
 
 

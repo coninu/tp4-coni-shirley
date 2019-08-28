@@ -6,13 +6,10 @@
     position: fixed;
     overflow: auto;
     top: 0;
-    //display:none;
-    // visibility:hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     .movie-details { 
-        //visibility: hidden; 
         position: absolute;
         width: 786px;
         height: 820px;
@@ -53,32 +50,6 @@
             @media(max-width: 500px){
                 height: 220px;
             }
-            .button-close {
-                width: 40px;
-                height: 40px;
-                transition: 0.5s;
-                background-color: none;
-                cursor: pointer;
-                position: absolute;
-                right: 0;
-                top: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                .close {
-                    transform: scale(2.2);
-                    font-weight: 300;
-                    line-height: 18px;
-                    color: white;
-                    display: inline-block;
-                    top: 0;
-                    left: 0;
-                    z-index: 7;
-                }
-            }
-            .button-close:hover {
-                background-color: #bc3b69;
-            }
             .movie-titles {
                 width: 50%;
                 height: auto;
@@ -88,13 +59,13 @@
                 margin-left: 50%;
                 padding: 20px 40px 20px 0px;
                 box-sizing: border-box;
-                h1 {
+                .title {
                     margin: 0 auto;
                     font-size: 30px;
                     font-weight: 500;
                     color: #bc3b69;
                 }
-                h4 {
+                .subtitle {
                     margin: 0 auto;
                     font-size: 14px;
                     font-weight: 300;
@@ -172,6 +143,59 @@
         }
     }
 }
+
+.movie-titles {
+    width: 50%;
+    height: auto;
+    justify-content: left;
+    position: absolute;
+    top: 122px;
+    margin-left: 50%;
+    padding: 20px 40px 20px 0px;
+    box-sizing: border-box;
+    .title {
+        margin: 0 auto;
+        font-size: 30px;
+        font-weight: 500;
+        color: #bc3b69;
+    }
+    .subtitle {
+        margin: 0 auto;
+        font-size: 14px;
+        font-weight: 300;
+        margin-top: 10px;
+        color: hsla(0,0%,100%,.7);
+    }
+}
+
+.button-close {
+    width: 40px;
+    height: 40px;
+    transition: 0.5s;
+    background-color: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .close {
+        transform: scale(2.2);
+        font-weight: 300;
+        line-height: 18px;
+        color: white;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        z-index: 7;
+    }
+    .button-close:hover {
+        background-color: #bc3b69;
+    }
+}
+
+
 .hidden {
     display: none;
 }
