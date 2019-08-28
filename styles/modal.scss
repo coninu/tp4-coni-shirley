@@ -5,8 +5,9 @@
     z-index: 5;
     position: fixed;
     overflow: auto;
+    top: 0;
     //display:none;
-    visibility:hidden;
+    // visibility:hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,4 +171,7 @@
             }
         }
     }
+}
+.hidden {
+    display: none;
 }

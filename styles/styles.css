@@ -316,7 +316,7 @@ button:hover {
   z-index: 5;
   position: fixed;
   overflow: auto;
-  visibility: hidden;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -502,6 +502,10 @@ button:hover {
 }
 .movie-modal .movie-details .movie-img img {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

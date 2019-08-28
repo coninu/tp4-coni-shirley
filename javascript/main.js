@@ -72,6 +72,7 @@ const searchMovie = () => {
             .then(res=>res.json())
             .then(res=>
                 {if (res.results.length >= 1) {
+                    l
                     printResults(res.results,query,res.total_results)
                 } else {
                     resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
@@ -86,16 +87,18 @@ const searchMovie = () => {
 const printResults = (movies,query,totalResults) => {
     document.getElementById("batman-banner").style.display="none"
     document.getElementById("home-results").style.display="none"
+
     const resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
     resultsContainer.innerHTML=""
     resultsContainer.style.display=""
     resultsContainer.appendChild(createCategoryHeader(query,totalResults))
+
     const results = document.createElement("div")
     results.classList.add("movies")
     results.id="results"
     createMovies(movies,results)
     resultsContainer.appendChild(results)    
-    createLoadMoreButton(results,query) // REVISAR 
+    createLoadMoreButton(results,query) // REVISAR
 }
 
 // Creamos elementos para las categorias : 1) el header
@@ -130,19 +133,22 @@ const createCategoryHeader = (category,totalResults) => {
 }
 
 // 2) creamos el boton de load more
+let currentPage = 1
 const createLoadMoreButton = (container,category) => {
-    let currentPage = 1
     const loadMoreDiv = document.createElement("div")
     loadMoreDiv.classList.add('load-more-div')
+
     const loadMoreButton = document.createElement("button")
     loadMoreButton.innerText="LOAD MORE"
     loadMoreButton.classList.add('load-more-button')
-    loadMoreDiv.appendChild(loadMoreButton)
     loadMoreButton.onclick=()=>{
+        console.log('snbsknd');
+        
         loadMore(category,currentPage)
         currentPage++
         return currentPage
     }
+    loadMoreDiv.appendChild(loadMoreButton)
     container.appendChild(loadMoreDiv)
 }
 
@@ -154,10 +160,14 @@ const loadMore = (query,currentPage) => {
     let url
     query === "popular"||query==="top_rated"||query==="upcoming"||query==="now_playing"
         ?url=`${baseUrl}${query}?api_key=${apiKey}&page=${currentPage}`
-        :url=`${baseUrl}search/movie?${apiKey}&query=${query}&page=${currentPage}`
+        :url=`${baseUrl}search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`
     fetch(url)
         .then(response => response.json())
-        .then(res => createMovies(res.results,container))
+        .then(res => {
+            
+            createMovies(res.results,container)
+
+        })
 }
 
 // Funciones correspondientes al Modal
@@ -178,7 +188,7 @@ const createModal = id => {
         let close = document.createElement('div')
         close.classList.add('close')
         close.innerText = "×"
-        close.onclick=()=> toggleFunction()
+        close.onclick=()=> toggleFunction(id)
         closeWindow.appendChild(close)
         
 
@@ -251,8 +261,8 @@ const createModal = id => {
         movieDetails.appendChild(movieTitles)
         movieDetails.appendChild(solidBack)
 
-        let modal= document.createElement('div');
-        modal.classList.add('movie-modal')
+        let modal= document.getElementById('movie-modal');
+        // modal.classList.add('movie-modal')
         modal.appendChild(movieDetails)
 
     });
@@ -261,13 +271,16 @@ const createModal = id => {
 
 
 const toggleFunction = (id) => { 
+    
     let modal = document.getElementById("movie-modal");
-    if (modal.style.visibility === "hidden") {
-        createModal(id) 
-        modal.style.visibility = "visible";
-    } else {
-        modal.style.visibility = "hidden";
-    }
+    modal.classList.toggle('hidden')
+    createModal(id) 
+    // if (modal.style.visibility === "hidden") {
+    //     createModal(id) 
+    //     modal.style.visibility = "visible";
+    // } else {
+    //     modal.style.visibility = "hidden";
+    // }
 }
 
 
