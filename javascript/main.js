@@ -72,7 +72,6 @@ const searchMovie = () => {
             .then(res=>res.json())
             .then(res=>
                 {if (res.results.length >= 1) {
-                    l
                     printResults(res.results,query,res.total_results)
                 } else {
                     resultsContainer = document.getElementById("resultsPerCategoryOrSearch")
@@ -97,8 +96,9 @@ const printResults = (movies,query,totalResults) => {
     results.classList.add("movies")
     results.id="results"
     createMovies(movies,results)
-    resultsContainer.appendChild(results)    
-    createLoadMoreButton(results,query) // REVISAR
+    resultsContainer.appendChild(results) 
+    const mainDiv = document.getElementById('movie-container')   
+    createLoadMoreButton(mainDiv,query) 
 }
 
 // Creamos elementos para las categorias : 1) el header
@@ -142,8 +142,6 @@ const createLoadMoreButton = (container,category) => {
     loadMoreButton.innerText="LOAD MORE"
     loadMoreButton.classList.add('load-more-button')
     loadMoreButton.onclick=()=>{
-       
-        
         loadMore(category,currentPage)
         currentPage++
         return currentPage
@@ -257,10 +255,8 @@ const createModal = id => {
         descriptionCont.appendChild(releaseDate)
 
         // apendeo todo al modal
-        movieDetails.appendChild(closeWindow)
         movieDetails.appendChild(background)
         movieDetails.appendChild(poster)
-        movieDetails.appendChild(movieTitles)
         movieDetails.appendChild(solidBack)
 
         let modal= document.getElementById('movie-modal');
