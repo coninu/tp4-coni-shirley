@@ -97,8 +97,9 @@ const printResults = (movies,query,totalResults) => {
     results.id="results"
     createMovies(movies,results)
     resultsContainer.appendChild(results) 
-    const mainDiv = document.getElementById('movie-container')   
-    createLoadMoreButton(mainDiv,query) 
+    //const mainDiv = document.getElementById('movie-container')   
+    //mainDiv.classList.add('movie-container')
+    createLoadMoreButton(resultsContainer,query) 
 }
 
 // Creamos elementos para las categorias : 1) el header
@@ -133,8 +134,9 @@ const createCategoryHeader = (category,totalResults) => {
 }
 
 // 2) creamos el boton de load more
-let currentPage = 1
+
 const createLoadMoreButton = (container,category) => {
+    let currentPage = 2
     const loadMoreDiv = document.createElement("div")
     loadMoreDiv.classList.add('load-more-div')
 
@@ -158,7 +160,7 @@ const loadMore = (query,currentPage) => {
     let url
     query === "popular"||query==="top_rated"||query==="upcoming"||query==="now_playing"
         ?url=`${baseUrl}${query}?api_key=${apiKey}&page=${currentPage}`
-        :url=`${baseUrl}search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`
+        :url=`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&page=${currentPage}`
     fetch(url)
         .then(response => response.json())
         .then(res => {
