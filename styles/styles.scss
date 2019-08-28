@@ -224,6 +224,7 @@ body {
         justify-content: space-between;
         text-align: center;
         padding: 25px;
+        width: 95%;
         .category-name {
             font-size: 18px;
             line-height: 20px;
@@ -321,6 +322,7 @@ body {
         display: flex;
         flex-direction: column;
         padding: 20px; 
+        margin: auto;
     }
 }
 

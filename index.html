@@ -17,7 +17,7 @@
         </div>
         <div class="search-bar">
             <div class="icon-container "><img src="images/search.png" id="search-icon"> </div>
-            <input type="text" placeholder="Search for a movie..." id="search-input" onfocus="this.value=''" onkeyup="searchFunction()">
+            <input type="text" placeholder="Search for a movie..." id="search-input" onfocus="this.value=''" onkeyup="searchMovie()">
         </div>
         <div class="nav-hamburger" id="nav-hamburger" onclick="menuHamburger()">
             <div class="bar"></div>
@@ -74,7 +74,7 @@
      <!----------------------------------------
         Contiene resultados de Peliculas 
     ---------------------------------------->
-        <div class="movie-container">
+        <div class="movie-container" id="movie-container">
              <!-- HOME Categoria:  Popular -->
                 <div class="results" id='home-results'>
                     <div class="category-header">
@@ -116,10 +116,19 @@
                              </div>
                             </div>
                             <!-- PAGINA por Categoria o para una Busqueda-->
+                            <div id="biggerContainer">
                              <div id="resultsPerCategoryOrSearch"> </div>
+                            </div>
 
         </div>
 </div>
+</div>
+ <!----------------------------------------
+               Modal
+---------------------------------------->
+<div id="movie-modal" class="movie-modal hidden"> 
+
+
 </div>
 </body>
 </html>
