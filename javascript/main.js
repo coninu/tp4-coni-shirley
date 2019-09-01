@@ -102,9 +102,12 @@ const printResults = (movies,query,totalResults) => {
     resultsContainer.appendChild(results) 
     const mainDiv = document.getElementById('movie-container')   
     //mainDiv.classList.add('movie-container')
-    if(document.getElementById("loadMoreBtn")===null)
-        { createLoadMoreButton(mainDiv,query) }
-}
+   if(document.getElementById("loadMoreBtn")===null)
+        {
+             createLoadMoreButton(mainDiv,query) 
+        }
+    }
+
 
 // Creamos elementos para las categorias : 1) el header
 
