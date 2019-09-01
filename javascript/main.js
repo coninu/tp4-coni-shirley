@@ -289,4 +289,15 @@ const toggleFunction = (id) => {
     }
 }
 
+// Menu hamburguer
+
+const menuHamburger = () =>{
+    const activeHamburger = document.getElementById("nav-hamburger")
+    activeHamburger.classList.toggle("nav-hamburger-active")
+
+    const sideBarHamburger = document.getElementById("side-bar-ham")
+    sideBarHamburger.classList.toggle("side-bar-ham-act")
+    
+
+}
 

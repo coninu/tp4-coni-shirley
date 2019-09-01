@@ -19,6 +19,11 @@
             <div class="icon-container "><img src="images/search.png" id="search-icon"> </div>
             <input type="text" placeholder="Search for a movie..." id="search-input" onfocus="this.value=''" onkeyup="searchMovie()">
         </div>
+        <div class="nav-hamburger" id="nav-hamburger" onclick="menuHamburger()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
     </header>
 </div>
     <div class="desktop-container">
@@ -59,6 +64,7 @@
                         </a>
                     </div>
       </aside>
+    
       <!----------------------------------------
         Contenido Principal: banner y peliculas
     ---------------------------------------->
@@ -165,5 +171,44 @@
 
 
 </div>
+<!----------------------------------------
+        Categorías del menú hamburguesa.
+    ---------------------------------------->
+    
+    <aside class="side-bar-ham" id="side-bar-ham">
+        <div class="category-button-h" id="popularButton" onclick="selectCategory('popular'); menuHamburger()" >
+                <a href="#" >
+                    <div class="category">
+                        <img src="images/popular.png" alt="">
+                        <h4>POPULAR</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="category-button-h" id="topRatedButton" onclick="selectCategory('top_rated'); menuHamburger()">
+                <a href="#" >
+                    <div class="category">
+                        <img src="images/top_rated.png" alt="">
+                        <h4>TOP RATED</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="category-button-h" id="upcomingButton" onclick="selectCategory('upcoming'); menuHamburger()">
+                <a href="#" >
+                    <div class="category">
+                        <img src="images/upcoming.png" alt="">
+                        <h4>UPCOMING</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="category-button-h" id="nowPlayingButton" onclick="selectCategory('now_playing'); menuHamburger()">
+                <a href="#" >
+                    <div class="category">
+                        <img src="images/now_playing.png" alt="">
+                        <h4>NOW PLAYING</h4>
+                    </div>
+                </a>
+            </div>
+</aside>
+
 </body>
 </html>
