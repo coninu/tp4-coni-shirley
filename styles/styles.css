@@ -177,6 +177,7 @@ body {
   z-index: 4;
   visibility: visible;
   opacity: 1;
+  height: 100vh;
   transition: all .5s ease; }
   .side-bar-ham-act .category-button-h {
     width: 25%;
