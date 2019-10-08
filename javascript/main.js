@@ -181,7 +181,7 @@ const loadMore = (query,currentPage) => {
 
 // Funciones correspondientes al Modal
 
-
+//esta función es muy extensa, se podría dividir en varias funciones 
 const createModal = id => {
     fetch(`${baseUrl}${id}?api_key=${apiKey}`)
     .then(response => response.json())
